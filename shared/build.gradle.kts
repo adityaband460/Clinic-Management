@@ -5,6 +5,15 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.sqldelight)
+}
+
+sqldelight {
+    databases {
+        create("ClinicDatabase") {
+            packageName.set("com.example.clinicmanagment.database")
+        }
+    }
 }
 
 kotlin {
@@ -46,6 +55,11 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.uiTooling)
         }
+
+        jvmMain.dependencies {
+            implementation("app.cash.sqldelight:sqlite-driver:2.1.0")
+        }
+
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
